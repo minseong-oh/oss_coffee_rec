@@ -5,9 +5,9 @@ import streamlit as st
 
 API_URL = os.getenv("API_URL", "http://back:8000")
 
-st.set_page_config(page_title="커피 원두 추천", page_icon="☕", layout="centered")
+st.set_page_config(page_title="커피 원두 추천", layout="centered")
 
-st.title("☕ 커피 원두 추천")
+st.title("커피 원두 추천")
 st.caption("취향을 입력하면 어울리는 원두 3종을 추천해드려요.")
 
 with st.form("preference_form"):
@@ -68,7 +68,7 @@ with st.form("preference_form"):
         help="평소 가장 자주 내리는 추출 방식을 골라주세요.",
     )
 
-    submitted = st.form_submit_button("☕ 원두 추천받기", use_container_width=True)
+    submitted = st.form_submit_button("원두 추천받기", use_container_width=True)
 
 if submitted:
     payload = {
@@ -94,15 +94,15 @@ if submitted:
     st.divider()
     st.subheader("추천 원두 TOP 3")
 
-    rank_emoji = {1: "🥇", 2: "🥈", 3: "🥉"}
+    rank_label = {1: "1위", 2: "2위", 3: "3위"}
     level_text = ["", "매우 낮음", "낮음", "중간", "높음", "매우 높음"]
 
     for bean in data["recommendations"]:
         with st.container(border=True):
             top_col, score_col = st.columns([3, 1])
             with top_col:
-                st.markdown(f"### {rank_emoji[bean['rank']]} {bean['name']}")
-                st.caption(f"📍 {bean['origin']}")
+                st.markdown(f"### {rank_label[bean['rank']]}. {bean['name']}")
+                st.caption(f"산지 : {bean['origin']}")
             with score_col:
                 st.metric("매칭 점수", f"{bean['score']}점")
 
@@ -119,7 +119,7 @@ if submitted:
                 for reason in bean["match_reasons"]:
                     st.markdown(f"- {reason}")
 
-            st.info(f"☕ **추출 팁** &nbsp; {bean['brew_tip']}")
+            st.info(f"**추출 팁** &nbsp; {bean['brew_tip']}")
 
     st.divider()
     with st.expander("FastAPI 원본 응답 (JSON)"):
