@@ -1,0 +1,16 @@
+services:
+  back:
+    build: ./back
+    container_name: coffee-back
+    restart: always
+
+  front:
+    build: ./front
+    container_name: coffee-front
+    ports:
+      - "80:8501"
+    environment:
+      - API_URL=http://back:8000
+    depends_on:
+      - back
+    restart: always
