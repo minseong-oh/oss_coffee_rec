@@ -17,7 +17,7 @@ with st.form("preference_form"):
         "산미",
         ["낮음", "중간", "높음"],
         index=1,
-        help="감귤·베리류처럼 새콤한 맛. 라이트 로스팅일수록 산미가 강해집니다.",
+        help="감귤/베리류처럼 새콤한 맛. 라이트 로스팅일수록 산미가 강해집니다.",
         horizontal=True,
     )
 
@@ -33,13 +33,13 @@ with st.form("preference_form"):
         "로스팅 정도",
         ["라이트", "미디엄", "다크"],
         index=1,
-        help="원두를 볶은 정도. 라이트는 신맛·꽃향, 다크는 쓴맛·고소함이 강해져요.",
+        help="원두를 볶은 정도. 라이트는 신맛/꽃향, 다크는 쓴맛/고소함이 강해져요.",
         horizontal=True,
     )
 
     flavor = st.radio(
         "향 프로파일",
-        ["과일·꽃", "견과·초콜릿", "흙·스파이스"],
+        ["과일/꽃", "견과/초콜릿", "흙/스파이스"],
         index=1,
         help="원두의 주된 풍미 계열입니다. 자신이 가장 끌리는 분위기를 골라주세요.",
         horizontal=True,
@@ -50,7 +50,7 @@ with st.form("preference_form"):
         min_value=1,
         max_value=5,
         value=3,
-        help="설탕이 아닌 원두 자체의 단맛 선호도. 후처리·품종에 따라 자연스러운 단맛이 강한 원두가 있어요.",
+        help="설탕이 아닌 원두 자체의 단맛 선호도. 후처리/품종에 따라 자연스러운 단맛이 강한 원두가 있어요.",
     )
 
     caffeine = st.radio(
@@ -107,7 +107,7 @@ if submitted:
                 st.metric("매칭 점수", f"{bean['score']}점")
 
             st.markdown(f"_{bean['description']}_")
-            st.markdown(f"**풍미 노트** : {' · '.join(bean['flavor_notes'])}")
+            st.markdown(f"**풍미 노트** : {' / '.join(bean['flavor_notes'])}")
 
             info_cols = st.columns(3)
             info_cols[0].markdown(f"**산미** &nbsp; {level_text[bean['acidity']]}")

@@ -22,7 +22,7 @@ class Preference(BaseModel):
     acidity: str = Field(..., description="낮음/중간/높음")
     body: str = Field(..., description="가벼움/중간/묵직")
     roast: str = Field(..., description="라이트/미디엄/다크")
-    flavor: str = Field(..., description="과일·꽃/견과·초콜릿/흙·스파이스")
+    flavor: str = Field(..., description="과일/꽃/견과/초콜릿/흙/스파이스")
     sweetness: int = Field(..., ge=1, le=5)
     caffeine: str = Field(..., description="낮음/보통/높음")
     brew_method: str = Field(..., description="에스프레소/드립/콜드브루/모카포트/프렌치프레스")
